@@ -8,8 +8,15 @@
   </head>
   <body>
 
+    <h1>Name Calculator</h1>
     <div ng-controller="nameCaculatorController">
-
+      Your name: 
+      <input type="text" 
+      ng-keyup="displayNumeric();"
+      ng-model="name" placeholder="Write your name">
+      <div> 
+      Total numeric value of person name is : {{totalValue}}
+      </div>
     </div>
 
   </body>
