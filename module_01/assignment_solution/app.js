@@ -9,39 +9,49 @@
     
     function LunchCheckController($scope) {
         
-        $scope.lunchMenu="";
+        $scope.lunchMenu;
         
-        $scope.message = "Message Report:";
+        $scope.message = "Message Report: Blank";
         
-        console.log(($scope.lunchMenu).length);
+        $scope.style={color:'black'};
+        console.log(($scope.lunchMenu));
 
 
         $scope.checkLunchMenu= function (){
             
-            if($scope.lunchMenu.length > 0){
+            console.log($scope.lunchMenu);
+            if($scope.lunchMenu != undefined && $scope.lunchMenu !=""){
             
-            console.log("Lunch:"+$scope.lunchMenu.length);
+            //console.log("Lunch:"+$scope.lunchMenu.length);
                 
                 var itemsLunch = $scope.lunchMenu.split(',');
           
                 console.log(itemsLunch);  
-            
-            } 
-            
-            //Check if the textbox is empty
-            if(itemsLunch.length == 0){
-                $scope.message="Please enter data first";
-            }
-            else {
-                if(itemsLunch.length<=3){
+                
+                                if(itemsLunch.length<=3){
                     $scope.message="Enjoy!";
+                            $scope.style={color:'green'};
+
 
                 }
                 else{
+                    
                     $scope.message="Too much!";
+                                                $scope.style={color:'green'};
+
 
                 }
+            
+            } 
+            else{
+                $scope.message = "Message Report: Please enter data first";
+                                            $scope.style={color:'red'};
+
             }
+            
+
+    
+            
         }
     }
     
