@@ -11,7 +11,29 @@
  function ToBuyController(ShoppingListCheckOffService) {
      var itemAdder = this;
      
-     itemAdder.itemsPre = [
+     itemAdder.itemsPre = ShoppingListCheckOffService.getItemsToBuy();
+
+     itemAdder.addItem = function(item){
+         ShoppingListCheckOffService.addItem(item);
+     }
+ }
+ 
+ AlreadyBoughtController.$inject=['ShoppingListCheckOffService'];
+ 
+function AlreadyBoughtController (ShoppingListCheckOffService){
+    
+    var listBought= this;
+    
+    listBought.items= ShoppingListCheckOffService.getItemsBought();
+}
+
+function ShoppingListCheckOffService(){
+    
+    var service = this;
+    
+    var itemsBought=[];
+    
+    var itemsToBuy= [
          {
          name:"Cookies",
          quantity:5
@@ -36,36 +58,20 @@
          name:"Carrots",
          quantity:2
          }
-         
-     ];
-     
-     itemAdder.addItem = function(item){
-         ShoppingListCheckOffService.addItem(item);
-         itemAdder.itemsPre.splice(itemAdder.itemsPre.indexOf(item),1);
-     }
- }
- 
- AlreadyBoughtController.$inject=['ShoppingListCheckOffService'];
- 
-function AlreadyBoughtController (ShoppingListCheckOffService){
-    
-    var listBought= this;
-    
-    listBought.items= ShoppingListCheckOffService.getItems();
-}
-
-function ShoppingListCheckOffService(){
-    
-    var service = this;
-    
-    var items=[];
-    
+        ];
+        
     service.addItem = function (item) {
-        items.push(item);
+        itemsBought.push(item);
+        itemsToBuy.splice(itemsToBuy.indexOf(item),1);
+
     }
     
-    service.getItems = function(){
-    return items;       
+    service.getItemsToBuy = function (){
+    return itemsToBuy;
+    }
+    
+    service.getItemsBought = function(){
+    return itemsBought;       
     }
 }
 })();
