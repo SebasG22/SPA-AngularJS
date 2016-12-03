@@ -41,6 +41,7 @@
      
      itemAdder.addItem = function(item){
          ShoppingListCheckOffService.addItem(item);
+         itemAdder.itemsPre.splice(itemAdder.itemsPre.indexOf(item),1);
      }
  }
  
@@ -59,14 +60,8 @@ function ShoppingListCheckOffService(){
     
     var items=[];
     
-    service.addItem = function (itemName, itemQuantity) {
-        var item = {
-            name: itemName,
-            quantity: itemQuantity
-        }
-        
+    service.addItem = function (item) {
         items.push(item);
-
     }
     
     service.getItems = function(){
