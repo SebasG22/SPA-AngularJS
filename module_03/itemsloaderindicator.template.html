@@ -1,0 +1,11 @@
+<br>
+<h3>Title: {{ menuDescription.title }}</h3>
+<br>
+<ol>
+  <li ng-repeat="item in menuDescription.items">
+     <b>{{ item.name }}</b>
+     <br>{{item.description}} 
+     <br>Cost: {{item.price_small}}
+     <button class="btn btn-default btn-sm">Remove</button>
+  </li>
+</ol>

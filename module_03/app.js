@@ -5,16 +5,42 @@
   angular.module("NarrowItDownApp",[])
   .controller("NarrowItDownController",NarrowItDownController)
   .service("MenuSearchService",MenuSearchService)
-  .constant('basePath', "https://davids-restaurant.herokuapp.com");
+  .constant('basePath', "https://davids-restaurant.herokuapp.com")
+  .directive('foundItems', FoundItemsDirective);
+
+
+function FoundItemsDirective() {
+  var ddo = {
+    templateUrl: 'itemsloaderindicator.template.html',
+    scope: {
+      title: '@',
+      items: '<'
+    },
+    controller: menuDescriptionDirectiveController,
+    controllerAs: 'menuDescription',
+    bindToController: true
+  };
+
+  return ddo;
+}
+
+function menuDescriptionDirectiveController() {
+  var menuDescription = this;
+
+}
 
   NarrowItDownController.$inject=['MenuSearchService'];
   function NarrowItDownController(MenuSearchService){
       
       var menuDescription = this;
       
+      var origTitle = "# Items Founded";
+      menuDescription.title = origTitle;   
+      
+      
       
       menuDescription.validateInput = function (termSearch){
-          if(termSearch!=undefined){
+          if(termSearch!=undefined && termSearch.length > 0 ){
              var a =  MenuSearchService.getMatchedMenuItems(termSearch);
              a.then(function(data) {
                  if(data.length!=0){
@@ -37,12 +63,14 @@
                  }
                  else{
                   menuDescription.menuDescInputShow = true;
+                  menuDescription.getItems=[];
                  }
                  
             })
           }
           else {
               menuDescription.menuDescInputShow = true;
+              menuDescription.getItems=[];
           }
       }
 

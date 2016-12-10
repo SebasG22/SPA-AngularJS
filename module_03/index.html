@@ -19,14 +19,11 @@
       <button class="btn btn-primary" ng-click="menuDescription.validateInput(menuDescription.menuDescInput)">Narrow It Down For Me!</button>
     </div>
     
-    {{ menuDescription.getItems }}
     
-    <br></br>
-    <h3 ng-if="menuDescription.menuDescInputShow == true ">Nothing found</h3>
-
+    <div class="error" ng-if="menuDescription.menuDescInputShow == true ">Nothing found</div>
 
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="...." on-remove="...."></found-items>
+    <found-items title="{{menuDescription.title}}" items="menuDescription.getItems"></found-items>
   </div>
 
 </body>
