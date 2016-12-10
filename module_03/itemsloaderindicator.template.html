@@ -1,11 +1,11 @@
 <br>
-<h3>Title: {{ menuDescription.title }}</h3>
+<h3>{{ menuDescription.title }}</h3>
 <br>
 <ol>
   <li ng-repeat="item in menuDescription.items">
      <b>{{ item.name }}</b>
      <br>{{item.description}} 
      <br>Cost: {{item.price_small}}
-     <button class="btn btn-default btn-sm">Remove</button>
+     <button class="btn btn-default btn-sm" ng-click=menuDescription.onRemove({index:$index});>Remove</button>
   </li>
 </ol>

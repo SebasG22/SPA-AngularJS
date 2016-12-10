@@ -11,6 +11,8 @@
 <body ng-app="NarrowItDownApp">
    <div class="container" ng-controller="NarrowItDownController as menuDescription">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
+          <p>Doesn't matter if your search is in uppercase, system convert it to a lowercase.</p>
+
 
     <div class="form-group">
       <input type="text" placeholder="search term" class="form-control" ng-model="menuDescription.menuDescInput">
@@ -19,11 +21,8 @@
       <button class="btn btn-primary" ng-click="menuDescription.validateInput(menuDescription.menuDescInput)">Narrow It Down For Me!</button>
     </div>
     
-    
-    <div class="error" ng-if="menuDescription.menuDescInputShow == true ">Nothing found</div>
-
     <!-- found-items should be implemented as a component -->
-    <found-items title="{{menuDescription.title}}" items="menuDescription.getItems"></found-items>
+    <found-items title="{{menuDescription.title}}" items="menuDescription.getItems" on-remove="menuDescription.removeItem(index)"></found-items>
   </div>
 
 </body>

@@ -14,7 +14,8 @@ function FoundItemsDirective() {
     templateUrl: 'itemsloaderindicator.template.html',
     scope: {
       title: '@',
-      items: '<'
+      items: '<',
+      onRemove: '&'
     },
     controller: menuDescriptionDirectiveController,
     controllerAs: 'menuDescription',
@@ -29,23 +30,28 @@ function menuDescriptionDirectiveController() {
 
 }
 
-  NarrowItDownController.$inject=['MenuSearchService'];
-  function NarrowItDownController(MenuSearchService){
+  NarrowItDownController.$inject=['MenuSearchService','$filter'];
+  function NarrowItDownController(MenuSearchService,$filter){
       
       var menuDescription = this;
       
-      var origTitle = "# Items Founded";
-      menuDescription.title = origTitle;   
+      var origTitle = "Items Founded";
+      menuDescription.title = "";   
       
-      
+      menuDescription.removeItem = function (itemIndex) {
+          console.log("Click on Remove");
+         menuDescription.getItems.splice(itemIndex,1);
+               menuDescription.title = menuDescription.getItems.length + " " + origTitle;   
+
+      }
       
       menuDescription.validateInput = function (termSearch){
           if(termSearch!=undefined && termSearch.length > 0 ){
-             var a =  MenuSearchService.getMatchedMenuItems(termSearch);
+             var a =  MenuSearchService.getMatchedMenuItems($filter('lowercase')(termSearch));
              a.then(function(data) {
                  if(data.length!=0){
-                 menuDescription.menuDescInputShow = false;
                  menuDescription.getItems = data ;
+                 menuDescription.title = menuDescription.getItems.length + " " + origTitle;   
                      for (var key in data) {
                             // skip loop if the property is from prototype
                             if (!data.hasOwnProperty(key)) continue;
@@ -62,21 +68,19 @@ function menuDescriptionDirectiveController() {
                        }
                  }
                  else{
-                  menuDescription.menuDescInputShow = true;
+                  menuDescription.getItems=[];
+                  menuDescription.title = "Nothing Found";  
                   menuDescription.getItems=[];
                  }
                  
             })
           }
           else {
-              menuDescription.menuDescInputShow = true;
+              menuDescription.title = "Nothing Found";   
               menuDescription.getItems=[];
           }
       }
 
-      
-      
-      
   }
   
   MenuSearchService.$inject = ['$http', 'basePath'];
