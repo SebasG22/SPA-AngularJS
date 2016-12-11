@@ -16,8 +16,8 @@ angular.module('ShoppingListComponentApp', [])
 });
 
 
-
-function ShoppingListComponentController() {
+ShoppingListComponentController.$inject=['$scope',"$element"];
+function ShoppingListComponentController($scope,$element) {
   var $ctrl = this;
 
   $ctrl.cookiesInList = function () {
@@ -33,6 +33,31 @@ function ShoppingListComponentController() {
   
   $ctrl.remove = function (myIndex) {
     $ctrl.onRemove({index : myIndex });
+  }
+  
+  $ctrl.$onInit = function () {
+    console.log("We are on $onInit");
+  }
+  
+  $ctrl.$onChanges = function (changeObj) {
+    console.log("Changes :" ,changeObj);
+  }
+  
+  $ctrl.$postLink = function () {
+    $scope.$watch('$ctrl.cookiesInList()',function (newValue,oldValue){
+      console.log($element);
+      if(newValue == true){
+        //Show warning
+        var warningElem = $element.find('div.error');
+        warningElem.slideDown(900);
+      }
+      else{
+        //Hide warning
+        var warningElem = $element.find('div.error');
+        warningElem.slideUp(900);
+
+      }
+    })
   }
 }
 
