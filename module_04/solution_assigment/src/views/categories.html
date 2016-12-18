@@ -1,17 +1,11 @@
 <div class="page-header text-center">
   <h1>S&S Restaurant <br><small>Categories</small></h1>
-</div>
-<div class="row">
-  <div class="col-sm-4 col-md-4" ng-repeat="category in menu.categories">
-    <div class="thumbnail">
-      <div style="cursor: pointer" class="caption text-center">
-        <h3 ui-sref="categoriesDetail({category: category.short_name })"=>{{category.name}}</h3>
-        <!--<p>{{category.id}}</p>-->
-        <!--<p>{{category.short_name}}</p>-->
-          <!--<button type="button" ui-sref="categoriesDetail" class="btn btn-info">See Details</button>-->
-      </div>
-    </div>
+  
+  <div class="point" ui-sref="home"> 
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go Back
   </div>
+
 </div>
 
+<list-categories categories="menu.categories"></list-categories>
 

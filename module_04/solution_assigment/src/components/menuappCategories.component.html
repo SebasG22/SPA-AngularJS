@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4" ng-repeat="category in $ctrl.categories">
+    <div class="thumbnail">
+      <div class="caption text-center point">
+        <h3 ui-sref="categoriesDetail({category: category.short_name })"=>{{category.name}}</h3>
+        <!--<p>{{category.id}}</p>-->
+        <!--<p>{{category.short_name}}</p>-->
+          <!--<button type="button" ui-sref="categoriesDetail" class="btn btn-info">See Details</button>-->
+      </div>
+    </div>
+  </div>
+</div>
