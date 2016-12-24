@@ -1,0 +1,37 @@
+<div class="container">
+    <h1 class="text-center">My Info</h1>
+    
+    <div class="col-md-8 col-sm-8 col-xs-12" ng-if="!myInfoCtrl.userInfo">
+        Not registered for our newsletter! <a ui-sref="newsletter.sign-up">Sign Up</a>
+    </div>
+    <div ng-if="myInfoCtrl.userInfo">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <table class="table">
+                <tr>
+                    <th scope="row">First Name</th>
+                    <td>{{myInfoCtrl.userInfo.firstname}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Name</th>
+                    <td>{{myInfoCtrl.userInfo.lastname}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>{{myInfoCtrl.userInfo.email}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone</th>
+                    <td>{{myInfoCtrl.userInfo.phone}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            {{myInfoCtrl.userInfo.mealid}} 
+            <strong>Favorite menu item:</strong> {{myInfoCtrl.userInfo.mealName}}
+            <figure class="figure">
+                <img src="images/menu/{{myInfoCtrl.userInfo.mealImage}}/{{myInfoCtrl.userInfo.mealImage}}.jpg"/>
+                <figcaption class="figure-caption">{{myInfoCtrl.userInfo.mealDescription}}</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
